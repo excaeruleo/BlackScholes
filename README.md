@@ -1,0 +1,1 @@
+Utilized Python to scrape Yahoo Finance data of AAPL from 2023 to Jan 8 2025 into a text file and then implemented the Black-Scholes Merton formula using C++ to give the price of the option at a given underlying price and time.
