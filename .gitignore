@@ -2,3 +2,5 @@
 /build*
 # ignore top-level venv
 /venv/
+# ignore Vim swap files
+*.swp
