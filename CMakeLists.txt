@@ -10,6 +10,14 @@ project(
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# output build artifacts in top level with per-config subdirectories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+
+# enable testing
+include(CTest)
+
 # compile options
 if(MSVC)
   # note: need standards-compliant lambda processor
@@ -18,9 +26,7 @@ else()
   add_compile_options(-Wall)
 endif()
 
-# enable testing
-include(CTest)
+# top-level include directory
+set(EXCBS_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-# bs_compare: Black-Scholes Euler forward difference vs. analytical comparison
-add_executable(bs_compare black_scholes_solver.cpp)
-add_test(NAME bs_compare COMMAND bs_compare)
+add_subdirectory(src)
