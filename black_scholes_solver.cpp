@@ -1,3 +1,5 @@
+#include <iomanip>
+#include <ios>
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -87,17 +89,32 @@ int main() {
     BlackScholesSolver solver(r, sigma);
     auto numerical = solver.solveNumerical(S0, K, T, numS, numT);
     // Print results and compare with analytical solution
-    std::cout << "Stock Price\tNumerical\tAnalytical\tDifference\n";
+    std::cout <<
+        "Stock Price     "
+        "Numerical       "
+        "Analytical      "
+        "Difference\n";
     double dS = (2*std::max(S0, K)) / (numS - 1);
-    
+    // column width when printing
+    constexpr int col_width = 16;
+    // ensure left-aligned output
+    std::cout << std::left;
+    // line formatting helper for fixed column width + precision
+    auto fmt = []() -> auto&
+    {
+        return std::cout << std::setw(col_width) << std::fixed <<
+            std::setprecision(6);
+    };
+    // print values as table
     for (int i = 0; i < numS; i += 5) {
         double S = i * dS;
         double analytical = solver.blackScholesCall(S, K, T);
-        std::cout << S << "\t\t" 
-                 << printf("%.5f", numerical[i]) << "\t"
-                 << printf("%.5f", analytical) << "\t"
-                 << printf("%.5f", std::abs(numerical[i] - analytical)) << "\n";
+        fmt() << S;
+        fmt() << numerical[i];
+        fmt() << analytical;
+        fmt() << (std::abs(numerical[i] - analytical)) << "\n";
     }
-
+    // final flush
+    std::cout << std::flush;
     return 0;
 } 
