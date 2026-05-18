@@ -1,0 +1,4 @@
+# ignore build directories
+/build*
+# ignore top-level venv
+/venv/
