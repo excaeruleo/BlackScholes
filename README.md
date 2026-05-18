@@ -9,6 +9,8 @@ PDE directly with example comparison against the analytical price.
 
 [CMake] >=3.21 and a C++17 compiler is required to build the project.
 
+[CMake]: https://cmake.org/cmake/help/latest/index.html
+
 For Unix:
 
 <!-- Debug or default config by not setting CMAKE_BUILD_TYPE -->
@@ -26,6 +28,8 @@ cmake -S . -B build_win64 -A x64 && cmake --build build_win64 --config Release -
 ```
 
 [CTest] tests can be run to validate the build.
+
+[CTest]: https://cmake.org/cmake/help/latest/manual/ctest.1.html
 
 For Unix:
 
